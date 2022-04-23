@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
-import { textFieldChangeEvent } from "../types";
+import { TextFieldChangeEvent } from "../types";
 import useDebounce from "../hooks/useDebounce";
 
 type repoGridProps = {
@@ -10,7 +10,7 @@ type repoGridProps = {
 const Searchbar: React.FC<repoGridProps> = ({ setSearchQuery }) => {
   const [state, setState] = useState<string>("");
 
-  const handleChange = (e: textFieldChangeEvent): void => {
+  const handleChange = (e: TextFieldChangeEvent): void => {
     setState(e.target.value);
   };
 

@@ -2,6 +2,7 @@ import React from "react";
 import Homepage from "./components/Homepage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const darkTheme = createTheme({
   palette: {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={lightTheme}>
           <Homepage />
+          <ReactQueryDevtools initialIsOpen={false} />
         </ThemeProvider>
       </QueryClientProvider>
     </React.StrictMode>
