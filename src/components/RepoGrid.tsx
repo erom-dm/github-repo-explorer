@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import useRepos from "../hooks/useRepos";
+import useSearchRepos from "../hooks/useSearchRepos";
 import TablePagination from "@mui/material/TablePagination";
 
 export type repoGridProps = { searchQuery: string; searchType: string };
@@ -8,7 +8,7 @@ const RepoGrid: React.FC<repoGridProps> = ({ searchQuery, searchType }) => {
   const [page, setPage] = React.useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = React.useState<number>(25);
   const { isLoading, isError, data, error, isFetching, isPreviousData } =
-    useRepos(searchQuery, searchType, page, itemsPerPage);
+    useSearchRepos(searchQuery, searchType, page, itemsPerPage);
 
   useEffect(() => {
     setPage(0);
