@@ -1,0 +1,17 @@
+@mixin styled-scrollbar() {
+  &::-webkit-scrollbar {
+    margin: 1px 0;
+    padding: 0;
+    width: 4px;
+    border-radius: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $spanishGrey;
+    border-radius: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 12px;
+  }
+}

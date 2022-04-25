@@ -1,0 +1,42 @@
+.repo-grid {
+  height: calc(100vh - 185px);
+  &__error-wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 110px;
+      height: 110px;
+    }
+  }
+  &__error-message {
+    margin: 20px 0 0;
+    max-width: 60%;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  &__wrap {
+    margin: 20px 0;
+    padding: 0 4px 0 0;
+    height: 100%;
+    overflow: auto;
+    @include styled-scrollbar();
+  }
+  &__content {
+    overflow: auto;
+    display: grid;
+    grid-auto-flow: row dense;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 4px 6px;
+  }
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

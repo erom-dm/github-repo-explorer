@@ -1,8 +1,8 @@
+@import "vars";
+@import "mixins";
 @import "homepage";
-
-html {
-  font-size: 62.5%;
-}
+@import "repo-grid";
+@import "repo-card";
 
 html, body, #root {
   height: 100vh;
@@ -17,9 +17,4 @@ body {
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-}
-
-h1 {
-  margin: 0;
-  font-size: 2.6rem;
 }

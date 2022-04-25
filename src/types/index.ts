@@ -10,95 +10,122 @@ export interface Endpoint {
   path: string;
 }
 
-export interface RepoSearchResult {
-  name: string;
-  id: number;
-  html_url: string;
-  created_at: string;
-  updated_at: string;
-  description: string;
-  language: string;
-  visibility: string;
+export interface RepoDataType {
+  allow_forking: boolean;
   stargazers_count: number;
-  license: string;
+  is_template: boolean;
+  pushed_at: string;
+  subscription_url: string;
+  language: string;
+  branches_url: string;
+  issue_comment_url: string;
+  labels_url: string;
+  score: number;
+  subscribers_url: string;
+  releases_url: string;
+  svn_url: string;
+  id: number;
+  forks: number;
+  archive_url: string;
+  git_refs_url: string;
+  forks_url: string;
+  visibility: string;
+  statuses_url: string;
+  ssh_url: string;
+  license: LicenseType;
+  full_name: string;
+  size: number;
+  languages_url: string;
+  html_url: string;
+  collaborators_url: string;
+  clone_url: string;
+  name: string;
+  pulls_url: string;
+  default_branch: string;
+  hooks_url: string;
+  trees_url: string;
+  tags_url: string;
+  private: boolean;
+  contributors_url: string;
+  has_downloads: boolean;
+  notifications_url: string;
+  open_issues_count: number;
+  description: string;
+  created_at: string;
+  watchers: number;
+  keys_url: string;
+  deployments_url: string;
+  has_projects: boolean;
+  archived: boolean;
+  has_wiki: boolean;
+  updated_at: string;
+  comments_url: string;
+  stargazers_url: string;
+  disabled: boolean;
+  git_url: string;
+  has_pages: boolean;
+  owner: OwnerType;
+  commits_url: string;
+  compare_url: string;
+  git_commits_url: string;
+  topics: any[];
+  blobs_url: string;
+  git_tags_url: string;
+  merges_url: string;
+  downloads_url: string;
+  has_issues: boolean;
+  url: string;
+  contents_url: string;
+  mirror_url: null;
+  milestones_url: string;
+  teams_url: string;
+  fork: boolean;
+  issues_url: string;
+  events_url: string;
+  issue_events_url: string;
+  text_matches: TextMatchesType;
+  assignees_url: string;
+  open_issues: number;
+  watchers_count: number;
+  node_id: string;
+  homepage: string;
+  forks_count: number;
 }
 
-// allow_forking: true
-// archive_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/{archive_format}{/ref}"
-// archived: false
-// assignees_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/assignees{/user}"
-// blobs_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/git/blobs{/sha}"
-// branches_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/branches{/branch}"
-// clone_url: "https://github.com/erom-dm/arena-stat-parser.git"
-// collaborators_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/collaborators{/collaborator}"
-// comments_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/comments{/number}"
-// commits_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/commits{/sha}"
-// compare_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/compare/{base}...{head}"
-// contents_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/contents/{+path}"
-// contributors_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/contributors"
-// created_at: "2021-10-11T13:32:26Z"
-// default_branch: "master"
-// deployments_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/deployments"
-// description: "WoW NovaInstanceTracker data parser"
-// disabled: false
-// downloads_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/downloads"
-// events_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/events"
-// fork: false
-// forks: 0
-// forks_count: 0
-// forks_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/forks"
-// full_name: "erom-dm/arena-stat-parser"
-// git_commits_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/git/commits{/sha}"
-// git_refs_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/git/refs{/sha}"
-// git_tags_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/git/tags{/sha}"
-// git_url: "git://github.com/erom-dm/arena-stat-parser.git"
-// has_downloads: true
-// has_issues: true
-// has_pages: true
-// has_projects: true
-// has_wiki: true
-// homepage: null
-// hooks_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/hooks"
-// html_url: "https://github.com/erom-dm/arena-stat-parser"
-// id: 415940095
-// is_template: false
-// issue_comment_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/issues/comments{/number}"
-// issue_events_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/issues/events{/number}"
-// issues_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/issues{/number}"
-// keys_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/keys{/key_id}"
-// labels_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/labels{/name}"
-// language: "TypeScript"
-// languages_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/languages"
-// license: null
-// merges_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/merges"
-// milestones_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/milestones{/number}"
-// mirror_url: null
-// name: "arena-stat-parser"
-// node_id: "R_kgDOGMq9_w"
-// notifications_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/notifications{?since,all,participating}"
-// open_issues: 0
-// open_issues_count: 0
-// owner: {login: "erom-dm", id: 32650878, node_id: "MDQ6VXNlcjMyNjUwODc4",…}
-// private: false
-// pulls_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/pulls{/number}"
-// pushed_at: "2022-03-28T17:58:57Z"
-// releases_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/releases{/id}"
-// score: 1
-// size: 18890
-// ssh_url: "git@github.com:erom-dm/arena-stat-parser.git"
-// stargazers_count: 0
-// stargazers_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/stargazers"
-// statuses_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/statuses/{sha}"
-// subscribers_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/subscribers"
-// subscription_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/subscription"
-// svn_url: "https://github.com/erom-dm/arena-stat-parser"
-// tags_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/tags"
-// teams_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/teams"
-// text_matches: [{object_url: "https://api.github.com/repositories/415940095", object_type: "Repository",…}]
-// topics: []
-// trees_url: "https://api.github.com/repos/erom-dm/arena-stat-parser/git/trees{/sha}"
-// updated_at: "2021-12-15T11:39:58Z"
-// url: "https://api.github.com/repos/erom-dm/arena-stat-parser"
-// visibility: "public"
-// watchers: 0
-// watchers_count: 0
+export interface LicenseType {
+  name: string;
+  spdx_id: string;
+  key: string;
+  url: string;
+  node_id: string;
+}
+
+export interface OwnerType {
+  gists_url: string;
+  repos_url: string;
+  following_url: string;
+  starred_url: string;
+  login: string;
+  followers_url: string;
+  type: string;
+  url: string;
+  subscriptions_url: string;
+  received_events_url: string;
+  avatar_url: string;
+  events_url: string;
+  html_url: string;
+  site_admin: boolean;
+  id: number;
+  gravatar_id: string;
+  node_id: string;
+  organizations_url: string;
+}
+
+export interface TextMatchesType {
+  fragment: string;
+  object_url: string;
+  object_type: string;
+  property: string;
+  matches: { indices: number[]; text: string }[];
+}
+

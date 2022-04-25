@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import useSearchRepos from "../hooks/useSearchRepos";
 import TablePagination from "@mui/material/TablePagination";
+import RepositoryCard from "./RepositoryCard";
+import { RepoDataType } from "../types";
+import OopsIcon from "../assets/oops.png";
 
 export type repoGridProps = { searchQuery: string; searchType: string };
 
@@ -28,28 +31,52 @@ const RepoGrid: React.FC<repoGridProps> = ({ searchQuery, searchType }) => {
     setPage(0);
   };
 
+  const dataLoading = isFetching || isLoading;
+
   return (
     <div className="repo-grid">
-      {isLoading ? (
-        "Loading..."
-      ) : isError ? (
-        <span>Error: {error.message}</span>
+      {isError ? (
+        <div className="repo-grid__error-wrap">
+          <img src={OopsIcon} alt="oops!" />
+          <div className="repo-grid__error-message">
+            Error: {error?.response?.data?.message || error?.message}
+          </div>
+        </div>
       ) : (
         <>
-          <div>
-            {data?.data?.items.slice(0, itemsPerPage).map((el: any) => (
-              <div key={el.id}>{el.name}</div>
-            ))}
+          <div className="repo-grid__wrap">
+            <div className="repo-grid__content">
+              {dataLoading
+                ? Array.from(Array(itemsPerPage), (_, i) => (
+                    <RepositoryCard
+                      isLoading={dataLoading}
+                      repoData={{} as RepoDataType}
+                      key={i}
+                    />
+                  ))
+                : data?.data?.items
+                    .slice(0, itemsPerPage)
+                    .map((el: any) => (
+                      <RepositoryCard
+                        isLoading={dataLoading}
+                        repoData={el}
+                        key={el.id}
+                      />
+                    ))}
+            </div>
           </div>
-          <TablePagination
-            component="div"
-            count={data?.data?.total_count}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={itemsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-          {isFetching ? <div> Loading...</div> : null}
+          <div className="repo-grid__controls">
+            {data?.data && (
+              <TablePagination
+                component="div"
+                count={data?.data?.total_count}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={itemsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            )}
+          </div>
         </>
       )}
     </div>

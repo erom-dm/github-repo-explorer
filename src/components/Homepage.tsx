@@ -6,7 +6,7 @@ import { searchMethods, SearchMethodValueTypes } from "../helpers/constants";
 const Homepage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchType, setSearchType] = useState<SearchMethodValueTypes>(
-    searchMethods.IN_NAME
+    searchMethods.IN_DESCRIPTION
   );
 
   return (

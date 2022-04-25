@@ -1,0 +1,46 @@
+.repo-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 1px 1px 3px $boxShadowGrey;
+  cursor: pointer;
+
+  .MuiCardHeader-root {
+    padding: 16px 16px 10px;
+  }
+  .MuiCardContent-root.repo-card__description-content {
+    padding-top: 0;
+  }
+  .MuiCardContent-root:last-child {
+    margin-top: auto;
+    padding-bottom: 16px;
+  }
+  .MuiAvatar-root {
+    width: 44px;
+    height: 44px;
+    margin: 0 8px 0 0;
+  }
+  &__bottom-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &__owner-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+  &__info-wrap {
+    text-align: right;
+  }
+  &__skeleton-bottom {
+    display: flex;
+    justify-content: flex-start;
+    &-inner-left {
+      margin: 0 0 0 8px;
+    }
+    &-inner-right {
+      margin: 0 0 0 auto;
+    }
+  }
+}
