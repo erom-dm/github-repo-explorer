@@ -5,4 +5,4 @@ export const searchMethods = {
   IN_OWNER_OR_NAME: "in:owner/name",
 } as const;
 type searchMethodType = typeof searchMethods;
-export type SearchMethodValueTypes = searchMethodType[keyof searchMethodType];
+export type SearchMethod = searchMethodType[keyof searchMethodType];

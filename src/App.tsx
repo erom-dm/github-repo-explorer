@@ -3,6 +3,7 @@ import Homepage from "./components/Homepage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 const darkTheme = createTheme({
   palette: {
@@ -23,8 +24,13 @@ const App: React.FC = () => {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={lightTheme}>
-          <Homepage />
-          <ReactQueryDevtools initialIsOpen={false} />
+          <HashRouter>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="*" element={<div>404</div>} />
+            </Routes>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </HashRouter>
         </ThemeProvider>
       </QueryClientProvider>
     </React.StrictMode>

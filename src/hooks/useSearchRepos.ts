@@ -4,20 +4,17 @@ import useAxios from "./useAxios";
 import { QueryObserverOptions } from "react-query/types/core/types";
 import parse, { Links } from "parse-link-header";
 import { AxiosError } from "axios";
+import {SearchParams, SearchReposAxiosConfig} from "../types";
 
-export default function useSearchRepos(
-  searchQuery: string,
-  searchType: string,
-  page: number,
-  itemsPerPage: number
-) {
+export default function useSearchRepos(searchParams: SearchParams) {
+  const { query, searchType, page, perPage } = searchParams;
   const axiosInstance = useAxios();
-  const config = {
+  const config: SearchReposAxiosConfig = {
     method: searchReposUrl.method,
     url: searchReposUrl.path,
     params: {
-      q: `${searchQuery} ${searchType}`,
-      per_page: itemsPerPage,
+      q: `${query} ${searchType}`,
+      per_page: perPage,
       page: page + 1,
     },
   };
@@ -28,10 +25,11 @@ export default function useSearchRepos(
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchInterval: false,
+    enabled: !!query,
   };
 
   const queryResult = useQuery<any, AxiosError>(
-    ["repos", searchQuery, page, itemsPerPage],
+    ["repos", query, page, perPage],
     () => axiosInstance(config),
     options
   );
@@ -41,7 +39,7 @@ export default function useSearchRepos(
   const links: Links | null = parse(data?.headers?.link);
   const nextPage: number = Number(links?.next?.page);
   const { isIdle, data: prefetchedData } = useQuery<any, AxiosError>(
-    ["repos", searchQuery, nextPage - 1, itemsPerPage],
+    ["repos", query, nextPage - 1, perPage],
     () =>
       axiosInstance({
         ...config,

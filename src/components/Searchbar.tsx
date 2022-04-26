@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
-import { TextFieldChangeEvent } from "../types";
+import { SearchParams, TextFieldChangeEvent } from "../types";
 import useDebounce from "../hooks/useDebounce";
+import { NavigateOptions } from "react-router";
 
 type repoGridProps = {
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  searchParams: SearchParams;
+  setSearchParams: (
+    newQuery: SearchParams,
+    options?: NavigateOptions | undefined
+  ) => void;
 };
 
-const Searchbar: React.FC<repoGridProps> = ({ setSearchQuery }) => {
-  const [state, setState] = useState<string>("");
+const Searchbar: React.FC<repoGridProps> = ({
+  searchParams,
+  setSearchParams,
+}) => {
+  const [state, setState] = useState<string>(searchParams.query || "");
 
   const handleChange = (e: TextFieldChangeEvent): void => {
     setState(e.target.value);
@@ -17,7 +25,10 @@ const Searchbar: React.FC<repoGridProps> = ({ setSearchQuery }) => {
   const debouncedInput = useDebounce(state, 500);
   useEffect(() => {
     if (debouncedInput) {
-      setSearchQuery(debouncedInput);
+      setSearchParams(
+        { ...searchParams, query: debouncedInput },
+        { replace: true }
+      );
     }
   }, [debouncedInput]);
 

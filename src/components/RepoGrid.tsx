@@ -1,46 +1,42 @@
-import React, { useEffect } from "react";
-import useSearchRepos from "../hooks/useSearchRepos";
-import TablePagination from "@mui/material/TablePagination";
+import React from "react";
 import RepositoryCard from "./RepositoryCard";
 import { RepoDataType } from "../types";
+import { AxiosError } from "axios";
 import OopsIcon from "../assets/oops.png";
+import SadIcon from "../assets/sad.png";
 
-export type repoGridProps = { searchQuery: string; searchType: string };
+export type repoGridProps = {
+  data: any;
+  isError: boolean;
+  error: AxiosError | null;
+  isLoading: any;
+  isFetching: boolean;
+  itemsPerPage: number;
+};
 
-const RepoGrid: React.FC<repoGridProps> = ({ searchQuery, searchType }) => {
-  const [page, setPage] = React.useState<number>(0);
-  const [itemsPerPage, setItemsPerPage] = React.useState<number>(25);
-  const { isLoading, isError, data, error, isFetching, isPreviousData } =
-    useSearchRepos(searchQuery, searchType, page, itemsPerPage);
-
-  useEffect(() => {
-    setPage(0);
-  }, [searchQuery]);
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setItemsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
+const RepoGrid: React.FC<repoGridProps> = ({
+  data,
+  isError,
+  error,
+  isLoading,
+  isFetching,
+  itemsPerPage,
+}) => {
   const dataLoading = isFetching || isLoading;
+  const dataLen = !!data?.data?.items.length;
+  const errorContent = isError
+    ? {
+        string: `Error: ${error?.response?.data?.message || error?.message}`,
+        icon: OopsIcon,
+      }
+    : { string: "Looks like nothing was found", icon: SadIcon };
 
   return (
     <div className="repo-grid">
-      {isError ? (
+      {isError || (data && !dataLen) ? (
         <div className="repo-grid__error-wrap">
-          <img src={OopsIcon} alt="oops!" />
-          <div className="repo-grid__error-message">
-            Error: {error?.response?.data?.message || error?.message}
-          </div>
+          <img src={errorContent.icon} alt="oops!" />
+          <div className="repo-grid__error-message">{errorContent.string}</div>
         </div>
       ) : (
         <>
@@ -64,18 +60,6 @@ const RepoGrid: React.FC<repoGridProps> = ({ searchQuery, searchType }) => {
                       />
                     ))}
             </div>
-          </div>
-          <div className="repo-grid__controls">
-            {data?.data && (
-              <TablePagination
-                component="div"
-                count={data?.data?.total_count}
-                page={page}
-                onPageChange={handleChangePage}
-                rowsPerPage={itemsPerPage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            )}
           </div>
         </>
       )}

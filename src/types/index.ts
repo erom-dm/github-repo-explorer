@@ -5,6 +5,23 @@ export type TextFieldChangeEvent = React.ChangeEvent<
   HTMLTextAreaElement | HTMLInputElement
 >;
 
+export interface SearchParams {
+  query: string;
+  searchType: string;
+  page: number;
+  perPage: number;
+}
+
+export interface SearchReposAxiosConfig {
+  method: Method | undefined;
+  url: string;
+  params: {
+    q: string;
+    page: number;
+    per_page: number;
+  };
+}
+
 export interface Endpoint {
   method: Method | undefined;
   path: string;
@@ -128,4 +145,3 @@ export interface TextMatchesType {
   property: string;
   matches: { indices: number[]; text: string }[];
 }
-
