@@ -1,0 +1,14 @@
+.search-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1 0;
+  margin: 20px 0 5px;
+  min-height: 0;
+  &__pagination-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

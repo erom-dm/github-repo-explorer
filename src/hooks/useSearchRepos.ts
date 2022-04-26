@@ -4,7 +4,7 @@ import useAxios from "./useAxios";
 import { QueryObserverOptions } from "react-query/types/core/types";
 import parse, { Links } from "parse-link-header";
 import { AxiosError } from "axios";
-import {SearchParams, SearchReposAxiosConfig} from "../types";
+import { SearchParams, SearchReposAxiosConfig } from "../types";
 
 export default function useSearchRepos(searchParams: SearchParams) {
   const { query, searchType, page, perPage } = searchParams;

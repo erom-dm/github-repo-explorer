@@ -21,6 +21,7 @@ const RepositoryCard: React.FC<repositoryCardProps> = ({
   repoData,
   isLoading,
 }) => {
+  const navigate = useNavigate();
   const {
     name,
     description,
@@ -30,6 +31,13 @@ const RepositoryCard: React.FC<repositoryCardProps> = ({
     updated_at,
     owner,
   } = repoData;
+
+  const handleClick = (e: SyntheticEvent) => {
+    if (isLoading) {
+      return;
+    }
+    navigate(`/repo/:${name}`, { replace: true });
+  };
 
   const formattedDescription = isLoading
     ? ""

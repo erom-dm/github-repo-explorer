@@ -27,6 +27,7 @@ const App: React.FC = () => {
           <HashRouter>
             <Routes>
               <Route path="/" element={<Homepage />} />
+              <Route path="repository/:title" />
               <Route path="*" element={<div>404</div>} />
             </Routes>
             <ReactQueryDevtools initialIsOpen={false} />
