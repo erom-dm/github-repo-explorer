@@ -1,5 +1,8 @@
 .repo-grid {
-  height: calc(100vh - 185px);
+  flex: 1 0;
+  align-self: stretch;
+  margin: 20px 0 5px;
+  min-height: 0;
   &__error-wrap {
     height: 100%;
     display: flex;
@@ -19,7 +22,6 @@
     font-size: 1.2rem;
   }
   &__wrap {
-    margin: 20px 0;
     padding: 0 4px 0 0;
     height: 100%;
     overflow: auto;
@@ -33,10 +35,5 @@
     grid-template-rows: auto;
     grid-gap: 10px;
     padding: 4px 6px;
-  }
-  &__controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }

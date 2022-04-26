@@ -8,7 +8,6 @@ function useQueryParam<T>(
 ): [T | undefined, (newQuery: T, options?: NavigateOptions) => void] {
   let [searchParams, setSearchParams] = useSearchParams();
   let paramValue = searchParams.get(key);
-
   let value = useMemo(() => JSURL.parse(paramValue), [paramValue]);
 
   let setValue = useCallback(

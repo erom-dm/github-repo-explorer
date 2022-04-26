@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { RepoDataType } from "../types";
 import {
   Avatar,
@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import truncateString from "../helpers/truncateString";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router";
 
 export type repositoryCardProps = {
   repoData: RepoDataType;
@@ -37,7 +38,7 @@ const RepositoryCard: React.FC<repositoryCardProps> = ({
   const updatedAt = isLoading ? "" : dayjs(updated_at).format("DD/MM/YYYY");
 
   return (
-    <Card className="repo-card" variant="outlined">
+    <Card className="repo-card" variant="outlined" onClick={handleClick}>
       {isLoading ? (
         <CardContent>
           <Skeleton animation={"wave"} variant="text" width={200} height={25} />

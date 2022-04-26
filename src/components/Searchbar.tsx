@@ -25,10 +25,7 @@ const Searchbar: React.FC<repoGridProps> = ({
   const debouncedInput = useDebounce(state, 500);
   useEffect(() => {
     if (debouncedInput) {
-      setSearchParams(
-        { ...searchParams, query: debouncedInput },
-        { replace: true }
-      );
+      setSearchParams({ ...searchParams, query: debouncedInput });
     }
   }, [debouncedInput]);
 

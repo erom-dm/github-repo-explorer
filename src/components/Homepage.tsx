@@ -8,76 +8,70 @@ import useQueryParams from "../hooks/useQueryParams";
 import { SearchParams } from "../types";
 
 const Homepage: React.FC = () => {
-  let [searchParams, setSearchParams] = useQueryParams<SearchParams>("search");
+  let [queryParams, setQueryParams] = useQueryParams<SearchParams>("search");
 
-  if (!searchParams) {
-    searchParams = {
+
+  if (!queryParams) {
+    queryParams = {
       query: "",
-      searchType: searchMethods.IN_DESCRIPTION,
+      searchType: searchMethods.IN_NAME,
       page: 0,
       perPage: 25,
     };
   }
 
   useEffect(() => {
-    if (searchParams?.query) {
-      setSearchParams(
-        { ...(searchParams as SearchParams), page: 0 },
-        { replace: true }
-      );
+    if (queryParams?.query) {
+      setQueryParams({ ...(queryParams as SearchParams), page: 0 });
     }
-  }, [searchParams.query]);
+  }, [queryParams.query]);
 
   const { isLoading, isError, data, error, isFetching, isPreviousData } =
-    useSearchRepos(searchParams);
+    useSearchRepos(queryParams);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
-    setSearchParams(
-      { ...(searchParams as SearchParams), page: newPage },
-      { replace: true }
-    );
+    setQueryParams({ ...(queryParams as SearchParams), page: newPage });
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setSearchParams(
-      {
-        ...(searchParams as SearchParams),
-        page: 0,
-        perPage: parseInt(event.target.value, 10),
-      },
-      { replace: true }
-    );
+    setQueryParams({
+      ...(queryParams as SearchParams),
+      page: 0,
+      perPage: parseInt(event.target.value, 10),
+    });
   };
 
   return (
     <div className="homepage">
-      <Searchbar
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-      />
-      {searchParams.query && (
+      <div className="homepage__searchbar-wrap">
+        <Searchbar
+          searchParams={queryParams}
+          setSearchParams={setQueryParams}
+        />
+      </div>
+      {queryParams.query && (
         <RepoGrid
           data={data}
           isError={isError}
           error={error}
           isFetching={isFetching}
           isLoading={isLoading}
-          itemsPerPage={searchParams.perPage}
+          itemsPerPage={queryParams.perPage}
         />
       )}
       {data?.data && (
-        <div className="repo-grid__controls">
+        <div className="homepage__pagination-wrap">
           <TablePagination
             component="div"
             count={data?.data?.total_count}
-            page={searchParams.page}
+            page={queryParams.page}
             onPageChange={handleChangePage}
-            rowsPerPage={searchParams.perPage}
+            rowsPerPage={queryParams.perPage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </div>
