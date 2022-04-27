@@ -2,6 +2,10 @@ import { useMemo } from "react";
 import axios from "axios";
 
 export default function useAxios(authToken = "") {
+  /** @param authToken - GitHub personal Auth token
+   *  Generate at:
+   *  https://github.com/settings/tokens
+   */
   const axiosInstance = useMemo(() => {
     return axios.create({
       baseURL: "https://api.github.com",

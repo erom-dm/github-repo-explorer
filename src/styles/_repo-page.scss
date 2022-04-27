@@ -1,0 +1,124 @@
+.repo-page {
+  padding: 20px 0;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  @include styled-scrollbar();
+
+  &__error {
+    flex: 1 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-inner-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      svg {
+        width: 100px;
+        height: 100px;
+        margin: 0 0 10px;
+      }
+    }
+  }
+  &__loading {
+    flex: 1 0;
+  }
+  &__main-content-wrap {
+    display: flex;
+    width: 100%;
+    flex-grow: 1;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px 0 0;
+
+    .MuiButton-root {
+      margin: 0 0 0 15px;
+      align-self: flex-end;
+      line-height: 15px;
+      width: 100%;
+    }
+  }
+  &__title-wrap-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    a {
+      font-size: 29px;
+    }
+  }
+  &__title {
+    text-transform: capitalize;
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    img {
+      height: 64px;
+      width: 64px;
+      margin: 0 10px 0 0;
+    }
+    .MuiTypography-root {
+      font-weight: 600;
+    }
+  }
+  &__title-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  &__readme-content {
+    flex: 1 0;
+    padding-bottom: 40px;
+    margin: 0 5px 0 0;
+    overflow: hidden;
+    * {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    img {
+      max-width: 100%;
+    };
+    & > :first-child {
+      margin-top: 0;
+    }
+  }
+  &__sidebar-wrap {
+    flex-basis: 25%;
+    padding: 0 15px 0 10px;
+     > *, > .MuiTypography-root {
+      margin: 0 0 10px;
+    }
+    .MuiAvatarGroup-root .MuiAvatar-root:last-child {
+      margin-left: -8px;
+    }
+  }
+  &__owner-link {
+    text-decoration: none;
+  }
+  &__owner-wrap {
+    display: flex;
+    color: black;
+    margin: 0 0 10px;
+    .MuiTypography-root {
+
+    }
+  }
+  &__owner-name {
+    align-self: flex-end;
+    &.MuiTypography-root {
+      margin: 0 0 0 5px;
+    }
+  }
+
+  .forks-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}

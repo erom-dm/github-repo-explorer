@@ -1,5 +1,7 @@
 import React from "react";
-import { Method } from "axios";
+import { AxiosError, Method } from "axios";
+import { NavigateOptions } from "react-router";
+import { UseQueryResult } from "react-query";
 
 export type TextFieldChangeEvent = React.ChangeEvent<
   HTMLTextAreaElement | HTMLInputElement
@@ -20,6 +22,22 @@ export interface SearchReposAxiosConfig {
     page: number;
     per_page: number;
   };
+}
+
+export interface GetRepoAxiosConfig {
+  method: Method | undefined;
+  url: string;
+}
+
+export interface HomepageContext {
+  selectedRepo: RepoDataType | null;
+  setSelectedRepo: React.Dispatch<React.SetStateAction<RepoDataType | null>>;
+  queryParams: SearchParams;
+  setQueryParams: (
+    newQuery: SearchParams,
+    options?: NavigateOptions | undefined
+  ) => void;
+  searchQueryRes: UseQueryResult<any, AxiosError<any, any>>;
 }
 
 export interface Endpoint {

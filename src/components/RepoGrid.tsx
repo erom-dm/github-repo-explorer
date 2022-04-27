@@ -2,8 +2,7 @@ import React from "react";
 import RepositoryCard from "./RepositoryCard";
 import { RepoDataType } from "../types";
 import { AxiosError } from "axios";
-import OopsIcon from "../assets/oops.png";
-import SadIcon from "../assets/sad.png";
+import ErrorDisplay from "./ErrorDisplay";
 
 export type repoGridProps = {
   data: any;
@@ -12,6 +11,7 @@ export type repoGridProps = {
   isLoading: any;
   isFetching: boolean;
   itemsPerPage: number;
+  setSelectedRepo: React.Dispatch<React.SetStateAction<RepoDataType | null>>;
 };
 
 const RepoGrid: React.FC<repoGridProps> = ({
@@ -21,23 +21,15 @@ const RepoGrid: React.FC<repoGridProps> = ({
   isLoading,
   isFetching,
   itemsPerPage,
+  setSelectedRepo,
 }) => {
   const dataLoading = isFetching || isLoading;
   const dataLen = !!data?.data?.items.length;
-  const errorContent = isError
-    ? {
-        string: `Error: ${error?.response?.data?.message || error?.message}`,
-        icon: OopsIcon,
-      }
-    : { string: "Looks like nothing was found", icon: SadIcon };
 
   return (
     <div className="repo-grid">
       {isError || (data && !dataLen) ? (
-        <div className="repo-grid__error-wrap">
-          <img src={errorContent.icon} alt="oops!" />
-          <div className="repo-grid__error-message">{errorContent.string}</div>
-        </div>
+        <ErrorDisplay isError={isError} error={error} />
       ) : (
         <>
           <div className="repo-grid__wrap">
@@ -57,6 +49,7 @@ const RepoGrid: React.FC<repoGridProps> = ({
                         isLoading={dataLoading}
                         repoData={el}
                         key={el.id}
+                        setSelectedRepo={setSelectedRepo}
                       />
                     ))}
             </div>

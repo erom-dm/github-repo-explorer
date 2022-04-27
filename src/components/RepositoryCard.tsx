@@ -15,11 +15,13 @@ import { useNavigate } from "react-router";
 export type repositoryCardProps = {
   repoData: RepoDataType;
   isLoading: boolean;
+  setSelectedRepo?: React.Dispatch<React.SetStateAction<RepoDataType | null>>;
 };
 
 const RepositoryCard: React.FC<repositoryCardProps> = ({
   repoData,
   isLoading,
+  setSelectedRepo,
 }) => {
   const navigate = useNavigate();
   const {
@@ -30,18 +32,20 @@ const RepositoryCard: React.FC<repositoryCardProps> = ({
     created_at,
     updated_at,
     owner,
+    id,
   } = repoData;
 
   const handleClick = (e: SyntheticEvent) => {
     if (isLoading) {
       return;
     }
-    navigate(`/repo/:${name}`, { replace: true });
+    setSelectedRepo && setSelectedRepo(repoData);
+    navigate(`/repository/:${owner.login}/:${name}`);
   };
 
   const formattedDescription = isLoading
     ? ""
-    : truncateString(description, 200, true);
+    : truncateString(description, 200);
   const createdAt = isLoading ? "" : dayjs(created_at).format("DD/MM/YYYY");
   const updatedAt = isLoading ? "" : dayjs(updated_at).format("DD/MM/YYYY");
 

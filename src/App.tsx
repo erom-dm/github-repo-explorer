@@ -4,12 +4,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter, Routes, Route } from "react-router-dom";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+import RepoPage from "./components/RepoPage";
+import SearchResults from "./components/SearchResults";
 
 const lightTheme = createTheme({
   palette: {
@@ -26,8 +22,13 @@ const App: React.FC = () => {
         <ThemeProvider theme={lightTheme}>
           <HashRouter>
             <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="repository/:title" />
+              <Route path="/" element={<Homepage />}>
+                <Route index element={<SearchResults />} />
+                <Route
+                  path="repository/:owner/:repoName"
+                  element={<RepoPage />}
+                />
+              </Route>
               <Route path="*" element={<div>404</div>} />
             </Routes>
             <ReactQueryDevtools initialIsOpen={false} />

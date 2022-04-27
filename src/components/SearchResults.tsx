@@ -2,26 +2,13 @@ import React from "react";
 import RepoGrid from "./RepoGrid";
 import TablePagination from "@mui/material/TablePagination";
 import { SearchParams } from "../types";
-import { UseQueryResult } from "react-query";
-import { AxiosError } from "axios";
-import { NavigateOptions } from "react-router";
+import Searchbar from "./Searchbar";
+import { useHomepageContext } from "./Homepage";
 
-type SearchResultsProps = {
-  queryParams: SearchParams;
-  searchQueryRes: UseQueryResult<any, AxiosError<any, any>>;
-  setQueryParams: (
-    newQuery: SearchParams,
-    options?: NavigateOptions | undefined
-  ) => void;
-};
-
-const SearchResults: React.FC<SearchResultsProps> = ({
-  queryParams,
-  searchQueryRes,
-  setQueryParams,
-}) => {
-  const { isLoading, isError, data, error, isFetching, isPreviousData } =
-    searchQueryRes;
+const SearchResults: React.FC = () => {
+  const { queryParams, searchQueryRes, setQueryParams, setSelectedRepo } =
+    useHomepageContext();
+  const { isLoading, isError, data, error, isFetching } = searchQueryRes;
   const { page, perPage, query } = queryParams;
 
   const handleChangePage = (
@@ -43,6 +30,12 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
   return (
     <div className="search-results">
+      <div className="search-results__search-bar-wrap">
+        <Searchbar
+          searchParams={queryParams}
+          setSearchParams={setQueryParams}
+        />
+      </div>
       {query && (
         <>
           <RepoGrid
@@ -52,6 +45,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             isFetching={isFetching}
             isLoading={isLoading}
             itemsPerPage={queryParams.perPage}
+            setSelectedRepo={setSelectedRepo}
           />
           {data?.data && (
             <div className="search-results__pagination-wrap">

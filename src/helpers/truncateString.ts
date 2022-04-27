@@ -1,7 +1,7 @@
 export default function truncateString(
   str: string,
   n: number,
-  useWordBoundary: boolean
+  useWordBoundary: boolean = true
 ): string {
   if (str) {
     const trimmedString = str.replace(/\s+/g, " ").trim();

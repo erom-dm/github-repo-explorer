@@ -1,23 +1,6 @@
 .repo-grid {
   min-height: 0;
-  &__error-wrap {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      width: 110px;
-      height: 110px;
-    }
-  }
-  &__error-message {
-    margin: 20px 0 0;
-    max-width: 60%;
-    text-align: center;
-    font-size: 1.2rem;
-  }
+  flex: 1;
   &__wrap {
     padding: 0 4px 0 0;
     height: 100%;

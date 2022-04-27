@@ -1,11 +1,14 @@
 .search-results {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-self: stretch;
+  padding: 25px 0 0;
   flex: 1 0;
-  margin: 20px 0 5px;
   min-height: 0;
+  &__search-bar-wrap {
+    align-self: stretch;
+    margin: 0 0 5px;
+  }
   &__pagination-wrap {
     display: flex;
     justify-content: center;
