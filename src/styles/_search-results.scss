@@ -8,10 +8,19 @@
   &__search-bar-wrap {
     align-self: stretch;
     margin: 0 0 5px;
+    display: flex;
   }
   &__pagination-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .searchbar {
+    flex: 1;
+    margin: 0 20px 0 0;
+  }
+  .MuiToggleButtonGroup-root {
+    height: 32px;
+    align-self: flex-end;
   }
 }

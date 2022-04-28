@@ -9,11 +9,11 @@ import { Fab } from "@mui/material";
 import { ReactComponent as GearboxIcon } from "../assets/manual-gearbox.svg";
 
 const Homepage: React.FC = () => {
-  let [searchParams, setSearchParams] = useQueryParams<SearchParams>("search");
+  let [queryParams, setQueryParams] = useQueryParams<SearchParams>("search");
   const [selectedRepo, setSelectedRepo] = useState<RepoDataType | null>(null);
 
-  if (!searchParams) {
-    searchParams = {
+  if (!queryParams) {
+    queryParams = {
       query: "",
       searchType: searchMethods.IN_NAME,
       page: 0,
@@ -21,7 +21,7 @@ const Homepage: React.FC = () => {
     };
   }
 
-  const searchQueryRes = useSearchRepos(searchParams);
+  const searchQueryRes = useSearchRepos(queryParams);
 
   return (
     <div className="homepage">
@@ -29,7 +29,7 @@ const Homepage: React.FC = () => {
         variant={"extended"}
         className="performanceMeasure"
         size={"small"}
-        onClick={() => calculate_load_times(true)}
+        onClick={() => calculate_load_times()}
       >
         <GearboxIcon />
         Log Performance
@@ -38,8 +38,8 @@ const Homepage: React.FC = () => {
         context={{
           selectedRepo,
           setSelectedRepo,
-          queryParams: searchParams,
-          setQueryParams: setSearchParams,
+          queryParams,
+          setQueryParams,
           searchQueryRes,
         }}
       />

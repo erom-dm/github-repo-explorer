@@ -22,7 +22,7 @@ export default function useSearchRepos(searchParams: SearchParams) {
   const options = defaultQueryOptions();
 
   const queryResult = useQuery<any, AxiosError>(
-    ["repos", query, page, perPage],
+    ["repos", query, searchType, page, perPage],
     () => axiosInstance(config),
     { ...options, enabled: !!query }
   );
@@ -31,7 +31,7 @@ export default function useSearchRepos(searchParams: SearchParams) {
   const { data } = queryResult;
   const links: Links | null = parse(data?.headers?.link);
   const nextPage: number = Number(links?.next?.page);
-  // @ts-ignore
+  // eslint-disable-next-line no-use-before-define
   const nextPageData = useQuery<any, AxiosError>(
     ["repos", query, nextPage - 1, perPage],
     () =>

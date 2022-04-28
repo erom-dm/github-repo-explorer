@@ -4,13 +4,29 @@ import TablePagination from "@mui/material/TablePagination";
 import { SearchParams } from "../types";
 import Searchbar from "./Searchbar";
 import { useHomepageContext } from "./Homepage";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ToggleButton from "@mui/material/ToggleButton";
+import { SearchMethod, searchMethods } from "../helpers/constants";
 
 const SearchResults: React.FC = () => {
   const { queryParams, searchQueryRes, setQueryParams, setSelectedRepo } =
     useHomepageContext();
+
   const { isLoading, isError, data, error, isFetching } = searchQueryRes;
   const { page, perPage, query } = queryParams;
 
+  const handleSearchTypeChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newType: SearchMethod
+  ) => {
+    if (newType !== null) {
+      setQueryParams({
+        ...(queryParams as SearchParams),
+        searchType: newType,
+        page: 0,
+      });
+    }
+  };
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -35,6 +51,22 @@ const SearchResults: React.FC = () => {
           searchParams={queryParams}
           setSearchParams={setQueryParams}
         />
+        <ToggleButtonGroup
+          value={queryParams.searchType}
+          exclusive
+          onChange={handleSearchTypeChange}
+          aria-label="text alignment"
+          size={"small"}
+        >
+          <ToggleButton value={searchMethods.IN_NAME}>Name</ToggleButton>
+          <ToggleButton value={searchMethods.IN_DESCRIPTION}>
+            Description
+          </ToggleButton>
+          <ToggleButton value={searchMethods.IN_README}>Readme</ToggleButton>
+          <ToggleButton value={searchMethods.IN_OWNER_OR_NAME}>
+            Owner/Name
+          </ToggleButton>
+        </ToggleButtonGroup>
       </div>
       {query && (
         <>
