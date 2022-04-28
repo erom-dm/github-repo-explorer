@@ -1,3 +1,3 @@
 # github-repo-explorer
 
-### WIP
+[Try deployed app here](https://gh-repository-explorer.netlify.app/)
