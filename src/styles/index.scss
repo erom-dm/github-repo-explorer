@@ -8,6 +8,7 @@
 @import "error-display";
 
 html, body, #root {
+  position: relative;
   height: 100vh;
   scroll-behavior: smooth;
   overflow: hidden;
@@ -15,6 +16,19 @@ html, body, #root {
 
 body {
   margin: 0;
+}
+
+.empty-route {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  height: 100vh;
+
+  &>:first-child {
+    margin: 0 0 10px 0;
+  }
 }
 
 * {

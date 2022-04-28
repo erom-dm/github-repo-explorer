@@ -2,10 +2,10 @@ import React from "react";
 import Homepage from "./components/Homepage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import RepoPage from "./components/RepoPage";
 import SearchResults from "./components/SearchResults";
+// import { ReactQueryDevtools } from "react-query/devtools";
 
 const lightTheme = createTheme({
   palette: {
@@ -29,9 +29,17 @@ const App: React.FC = () => {
                   element={<RepoPage />}
                 />
               </Route>
-              <Route path="*" element={<div>404</div>} />
+              <Route
+                path="*"
+                element={
+                  <div className={"empty-route"}>
+                    <div>Nothing to see here</div>
+                    <div>¯\_(ツ)_/¯</div>
+                  </div>
+                }
+              />
             </Routes>
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/*<ReactQueryDevtools initialIsOpen={false} />*/}
           </HashRouter>
         </ThemeProvider>
       </QueryClientProvider>
