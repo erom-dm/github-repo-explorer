@@ -5,12 +5,12 @@ import SadIcon from "../assets/sad.png";
 import { ReactComponent as FileNotFound } from "../assets/file-x.svg";
 import { Typography } from "@mui/material";
 
-type ErrorDisplay = {
+type ErrorDisplayProps = {
   isError: boolean;
   error: AxiosError<any, any> | null;
 };
 
-const ErrorDisplay: React.FC<ErrorDisplay> = ({ isError, error }) => {
+const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ isError, error }) => {
   const errorContent = isError
     ? {
         string: `Error: ${error?.response?.data?.message || error?.message}`,

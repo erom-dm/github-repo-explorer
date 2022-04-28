@@ -32,7 +32,6 @@ const RepositoryCard: React.FC<repositoryCardProps> = ({
     created_at,
     updated_at,
     owner,
-    id,
   } = repoData;
 
   const handleClick = (e: SyntheticEvent) => {

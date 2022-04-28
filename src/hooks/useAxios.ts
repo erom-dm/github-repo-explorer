@@ -11,7 +11,7 @@ export default function useAxios(authToken = "") {
       baseURL: "https://api.github.com",
       timeout: 1000,
     });
-  }, [authToken]);
+  }, []);
   if (authToken) {
     axiosInstance.defaults.headers.common[
       "Authorization"

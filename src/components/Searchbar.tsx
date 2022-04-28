@@ -27,7 +27,7 @@ const Searchbar: React.FC<repoGridProps> = ({
     if (debouncedInput) {
       setSearchParams({ ...searchParams, query: debouncedInput, page: 0 });
     }
-  }, [debouncedInput]);
+  }, [debouncedInput, searchParams, searchParams]);
 
   return (
     <div className="searchbar">
